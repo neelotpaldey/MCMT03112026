@@ -17,8 +17,8 @@ REFRESH_SECONDS = 5
 BATCH_SIZE = 3  # students who go in together
 
 ROOMS = {
-    1: "Room 1 - Meeting Room",
-    2: "Room 2 - IGNOU Cabin",
+    1: "Room 1 - IGNOU Cabin",
+    2: "Room 2 - Meeting Room",
 }
 
 NAMES = [
@@ -65,10 +65,11 @@ def init_db():
     if "room" not in columns:
         conn.execute("ALTER TABLE students ADD COLUMN room INTEGER")
     count = conn.execute("SELECT COUNT(*) FROM students").fetchone()[0]
-    if count == 0:
+    if count < len(NAMES):
+        # adds only the missing students, so existing statuses are kept
         for number, name in enumerate(NAMES, start=1):
             conn.execute(
-                "INSERT INTO students (sr, name, status) VALUES (?, ?, ?)",
+                "INSERT OR IGNORE INTO students (sr, name, status) VALUES (?, ?, ?)",
                 (number, name, WAITING),
             )
     conn.commit()
