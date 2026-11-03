@@ -168,28 +168,40 @@ def view_panel():
     done = [r for r in rows if r["status"] == OUT]
     absent = [r for r in rows if r["status"] == ABSENT]
 
-    st.markdown("### 🟢 Now in interview")
-    for room_no in ROOMS:
-        group = [r for r in inside if r["room"] == room_no]
-        st.markdown("**" + ROOMS[room_no] + "**")
-        if group:
-            for r in group:
-                st.success(short(r))
-        else:
-            st.info("Free right now")
+    col1, col2, col3 = st.columns(3)
+    room_cols = {1: col1, 2: col2}
 
-    st.markdown("### ⏭️ Next group")
-    if waiting:
-        st.warning("Please be ready at the interview rooms:")
-        for r in waiting[:BATCH_SIZE]:
-            st.write(short(r))
-        later = waiting[BATCH_SIZE:BATCH_SIZE * 2]
-        if later:
-            st.markdown("**Get ready (the group after that):**")
-            for r in later:
-                st.write(short(r))
-    else:
-        st.write("No one is waiting.")
+    for room_no in ROOMS:
+        with room_cols[room_no]:
+            st.markdown("### 🚪 " + ROOMS[room_no])
+            group = [r for r in inside if r["room"] == room_no]
+            if group:
+                st.markdown("**🟢 In interview now**")
+                for r in group:
+                    st.success(short(r))
+            else:
+                st.info("Free right now")
+
+    with col3:
+        st.markdown("### ⏳ Waiting (" + str(len(waiting)) + ")")
+        if waiting:
+            st.markdown("**⏭️ Next group - be ready at the rooms**")
+            for r in waiting[:BATCH_SIZE]:
+                st.warning(short(r))
+            later = waiting[BATCH_SIZE:BATCH_SIZE * 2]
+            if later:
+                st.markdown("**Get ready after that**")
+                for r in later:
+                    st.info(short(r))
+            rest = waiting[BATCH_SIZE * 2:]
+            if rest:
+                st.markdown("**Remaining**")
+                for r in rest:
+                    st.write(short(r))
+        else:
+            st.write("No one is waiting.")
+
+    st.divider()
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Waiting", len(waiting))
@@ -307,7 +319,7 @@ def faculty_panel():
 
 # ---------------- page ----------------
 
-st.set_page_config(page_title="Interview Tracker", page_icon="🎤", layout="centered")
+st.set_page_config(page_title="Interview Tracker", page_icon="🎤", layout="wide")
 init_db()
 
 st.title("🎤 Interview Tracker")
