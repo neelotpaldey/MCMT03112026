@@ -17,8 +17,8 @@ REFRESH_SECONDS = 5
 BATCH_SIZE = 3  # students who go in together
 
 ROOMS = {
-    1: "Room 1 - IGNOU Cabin",
-    2: "Room 2 - Meeting Room",
+    1: "Room 1 - Meeting Room",
+    2: "Room 2 - IGNOU Cabin",
 }
 
 NAMES = [
