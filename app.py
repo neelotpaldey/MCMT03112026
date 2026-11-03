@@ -35,7 +35,7 @@ NAMES = [
     "Chandramauli Upadhyay", "Aftab Alam", "Arshad Kamal",
     "Amit Devbanshi", "Gunjan Kumari", "Shreyashi Singh",
     "Mansi Jaiswal", "Jayanti Yadav", "Priya Singh", "Muskan Kaur",
-    "Shweta Maurya",
+    "Shweta Maurya", "Ayush Verma", "Abhay Kumar Pandey", "Aman Singh",
 ]
 
 WAITING = "Waiting"
