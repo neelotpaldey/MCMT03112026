@@ -34,6 +34,8 @@ NAMES = [
     "Vikki Kumar", "Anshuman Chaurasia", "Nikhil Tiwari", "Subrat Jha",
     "Chandramauli Upadhyay", "Aftab Alam", "Arshad Kamal",
     "Amit Devbanshi", "Gunjan Kumari", "Shreyashi Singh",
+    "Mansi Jaiswal", "Jayanti Yadav", "Priya Singh", "Muskan Kaur",
+    "Shweta Maurya",
 ]
 
 WAITING = "Waiting"
